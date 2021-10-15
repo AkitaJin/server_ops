@@ -5,6 +5,8 @@
 | 版本            | 12            |
 | 用户1           | postgres      |
 | 用户1密码       | zhny_qre      |
+| 用户2           | qreuser       |
+| 用户2密码       | qre311223     |
 | 测试用户        | jin           |
 | 测试用户密码    | 123123        |
 | pgAdmin用户     | zhny@aiit.com |
@@ -232,3 +234,47 @@ service postgresql restart
 
 https://computingforgeeks.com/install-postgresql-12-on-ubuntu/
 
+## 查看定时
+
+在postgres用户下
+
+```	bash
+crontab -e
+```
+
+备份脚本
+
+/home/zhny/scripts/ops/dw_backups.sh
+
+备份日志
+
+/home/zhny/scripts/ops/dw_backups.log
+
+备份文件地址
+
+"/home/zhny/backups/db_bak.sql"
+
+## 权限设置
+
+### database授权
+
+```sql
+GRANT ALL PRIVILEGES ON DATABASE postgres TO qreuser;
+```
+
+### schema授权
+
+```sql
+grant select on all tables in schema public to qreuser ; ---授查看权
+alter role qreuser  set default_transaction_read_only=true; ---设置只能读不能写
+```
+
+
+
+
+
+# 故障
+
+## 问题1
+
+Active: active (exited)
